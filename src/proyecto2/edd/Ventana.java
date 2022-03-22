@@ -5,6 +5,10 @@
  */
 package proyecto2.edd;
 
+import java.io.File;
+import java.util.Scanner;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author dario
@@ -17,6 +21,26 @@ public class Ventana extends javax.swing.JFrame {
     public Ventana() {
         initComponents();
     }
+    
+    
+    /**
+     * Description: getPath es la que ejecuta el 
+     * JFileChooser para determinar la ruta del 
+     * archivo txt que funcionarpa como base de
+     * datos 
+     * 
+     * @author Darío Aldana
+     * 
+     * @return path: string con la ruta
+     */
+    private String getPath(){
+        JFileChooser selector = new JFileChooser(); 
+        selector.showOpenDialog(null); 
+        File f = selector.getSelectedFile(); 
+        String path = f.getAbsolutePath();
+        return path;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,6 +52,7 @@ public class Ventana extends javax.swing.JFrame {
     private void initComponents() {
 
         play = new javax.swing.JButton();
+        loadDB = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -39,13 +64,48 @@ public class Ventana extends javax.swing.JFrame {
         play.setToolTipText("");
         play.setAlignmentY(0.0F);
         play.setBorder(new javax.swing.border.MatteBorder(null));
-        getContentPane().add(play, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 90, 30));
+        getContentPane().add(play, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 90, 30));
+
+        loadDB.setBackground(new java.awt.Color(255, 255, 204));
+        loadDB.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        loadDB.setText("<html>CARGAR BASE DE<br>CONOCIMIENTOS</html>");
+        loadDB.setToolTipText("");
+        loadDB.setAlignmentY(0.0F);
+        loadDB.setBorder(new javax.swing.border.MatteBorder(null));
+        loadDB.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        loadDB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadDBActionPerformed(evt);
+            }
+        });
+        getContentPane().add(loadDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 140, 50));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Photos/Fondo safari.jpg"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    
+    
+    private void loadDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadDBActionPerformed
+        // TODO add your handling code here:
+        StringBuilder db = new StringBuilder();
+        try {
+            File file = new File(getPath());
+            Scanner sc = new Scanner(file);
+            sc.nextLine();
+            while(sc.hasNext()){
+                String line = sc.nextLine();
+                db.append(line);
+                db.append("//");
+            }
+        } catch (Exception e){
+            System.out.println("Error");
+        }
+        System.out.println("HERE");
+        System.out.println(db);
+    }//GEN-LAST:event_loadDBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -84,6 +144,7 @@ public class Ventana extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private javax.swing.JButton loadDB;
     private javax.swing.JButton play;
     // End of variables declaration//GEN-END:variables
 }
