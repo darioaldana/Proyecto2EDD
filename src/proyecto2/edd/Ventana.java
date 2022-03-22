@@ -6,8 +6,10 @@
 package proyecto2.edd;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,7 +28,7 @@ public class Ventana extends javax.swing.JFrame {
     /**
      * Description: getPath es la que ejecuta el 
      * JFileChooser para determinar la ruta del 
-     * archivo txt que funcionarpa como base de
+     * archivo txt que funcionará como base de
      * datos 
      * 
      * @author Darío Aldana
@@ -98,11 +100,21 @@ public class Ventana extends javax.swing.JFrame {
             while(sc.hasNext()){
                 String line = sc.nextLine();
                 db.append(line);
-                db.append("//");
+                db.append("\n");
             }
+        } catch(FileNotFoundException ex){
+            JOptionPane.showMessageDialog(null, 
+                    "El archivo no existe o no se encuentra en la ruta especificada",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
+            
         } catch (Exception e){
-            System.out.println("Error");
+            JOptionPane.showMessageDialog(null, 
+                    "Error al leer el archivo",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
+        
         System.out.println("HERE");
         System.out.println(db);
     }//GEN-LAST:event_loadDBActionPerformed

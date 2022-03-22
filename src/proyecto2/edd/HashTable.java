@@ -11,12 +11,12 @@ package proyecto2.edd;
  */
 
 public class HashTable {
-    NodoHash tabla[];  //array de NodoHashs
+    Nodo tabla[];  //array de nodos
     int size; //número primo (se tomó 10111)
     
     public HashTable(int size){
         this.size = size; 
-        this.tabla = new NodoHash[size]; 
+        this.tabla = new Nodo[size]; 
         for (int i = 0; i < size; i++) {
             this.tabla[i] = null; 
         }
@@ -28,8 +28,8 @@ public class HashTable {
      * @param animal [String]: va a hacer las funciones
      *          de clave del objeto guardado en la tabla. 
      * 
-     * @return index [int]: índice del objeto en el arreglo
-     *          de NodoHashs; es la posición del elemento en
+     * @return index [int]: índice del objeto en el arreglo de nodos
+     *          para la HashTable; es la posición del elemento en
      *          ese array. 
      */
     public int hashing(String animal){
@@ -80,16 +80,16 @@ public class HashTable {
             // si la posicion no está vacía, recorro los elementos
             //enlistados en esa misma posición. 
             
-            NodoHash temp = this.tabla[posicion];
+            Nodo temp = this.tabla[posicion];
             
-            if (temp.getName().equals(animal)){
+            if (temp.getData().equals(animal)){
                 existe = true; 
                 
             }
             
             while (temp.getNext() != null){
                 temp = temp.getNext(); 
-                if (temp.getName().equals(animal)){
+                if (temp.getData().equals(animal)){
                     existe = true; 
                 }
             }
@@ -98,26 +98,26 @@ public class HashTable {
             //no se encuentra en la tabla anteriormente
             
             if (!existe){
-                NodoHash nuevo = new NodoHash(animal); 
+                Nodo nuevo = new Nodo(animal); 
                 temp.setNext(nuevo); 
             }
             
         } else {
-            NodoHash nuevo = new NodoHash(animal); 
+            Nodo nuevo = new Nodo(animal); 
             this.tabla[posicion] = nuevo;   
         }
     }
     
-    public NodoHash buscar(String animal){
+    public Nodo buscar(String animal){
         int posicion = hashing(animal); 
-        NodoHash temp = this.tabla[posicion]; 
+        Nodo temp = this.tabla[posicion]; 
         boolean existe = false; 
         if (temp.getNext() != null){
             if (temp.getNext() == null){
                 existe = true; ////check checl checl 
             } else {
                 while (temp.getNext() != null && !existe){
-                    if (temp.getName().equals(animal)){
+                    if (temp.getData().equals(animal)){
                         existe = true; 
                     } else {
                         temp = temp.getNext(); 
