@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
  * @author dario
  */
 public class Ventana extends javax.swing.JFrame {
+    Arbol t = new Arbol(); 
 
     /**
      * Creates new form Ventana
@@ -117,6 +118,10 @@ public class Ventana extends javax.swing.JFrame {
         
         System.out.println("HERE");
         System.out.println(db);
+        t.createTree(db.toString().toLowerCase());
+        
+        
+        
     }//GEN-LAST:event_loadDBActionPerformed
 
     /**
