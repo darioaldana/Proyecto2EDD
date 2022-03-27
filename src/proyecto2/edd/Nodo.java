@@ -76,6 +76,11 @@ public class Nodo {
         this.right = right;
     }
     
-    
+    public boolean esHoja(){
+        if (this.getRight()==null && this.getLeft()==null){
+            return true;
+        }
+        return false;
+    }
 }
 

@@ -17,12 +17,24 @@ import javax.swing.JOptionPane;
  */
 public class Ventana extends javax.swing.JFrame {
     Arbol t = new Arbol(); 
+    Nodo aux = null;
+    Boolean cargado = false;
+    private final String inicioRonda = "Estas listo para jugar una ronda?";
+    private final String adivinado = "¡Qué fácil, ponlo más difícil la próxima vez!";
 
     /**
      * Creates new form Ventana
      */
     public Ventana() {
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
         initComponents();
+        jTextField1.setVisible(false);
+        siButton.setVisible(false);
+        noButton.setVisible(false);
+        continuarButton.setVisible(false);
+        enviarButton.setVisible(false);
+        inputTextField.setVisible(false);
     }
     
     
@@ -54,19 +66,87 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        inputTextField = new javax.swing.JTextField();
+        enviarButton = new javax.swing.JButton();
+        noButton = new javax.swing.JButton();
+        continuarButton = new javax.swing.JButton();
+        siButton = new javax.swing.JButton();
         play = new javax.swing.JButton();
         loadDB = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        inputTextField.setFont(new java.awt.Font("Artifakt Element Book", 0, 12)); // NOI18N
+        inputTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        inputTextField.setText("Escribe aqui");
+        inputTextField.setToolTipText("Escribe aqui");
+        inputTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(152, 255, 150)));
+        getContentPane().add(inputTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 160, 30));
+
+        enviarButton.setBackground(new java.awt.Color(245, 245, 245));
+        enviarButton.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
+        enviarButton.setText("Enviar");
+        enviarButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(152, 255, 150), 2));
+        enviarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(enviarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 60, 30));
+
+        noButton.setBackground(new java.awt.Color(255, 255, 224));
+        noButton.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        noButton.setText("No");
+        noButton.setToolTipText("");
+        noButton.setAlignmentY(0.0F);
+        noButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(152, 255, 150), 3));
+        noButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(noButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 40, 30));
+
+        continuarButton.setBackground(new java.awt.Color(255, 255, 204));
+        continuarButton.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        continuarButton.setText("Continuar");
+        continuarButton.setToolTipText("");
+        continuarButton.setAlignmentY(0.0F);
+        continuarButton.setBorder(new javax.swing.border.MatteBorder(null));
+        continuarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                continuarButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(continuarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 90, 30));
+
+        siButton.setBackground(new java.awt.Color(255, 255, 224));
+        siButton.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        siButton.setText("Sí");
+        siButton.setToolTipText("");
+        siButton.setAlignmentY(0.0F);
+        siButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(152, 255, 150), 3));
+        siButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(siButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 40, 30));
 
         play.setBackground(new java.awt.Color(255, 255, 204));
         play.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         play.setText("JUGAR");
         play.setToolTipText("");
         play.setAlignmentY(0.0F);
-        play.setBorder(new javax.swing.border.MatteBorder(null));
+        play.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        play.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playActionPerformed(evt);
+            }
+        });
         getContentPane().add(play, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 90, 30));
 
         loadDB.setBackground(new java.awt.Color(255, 255, 204));
@@ -74,7 +154,7 @@ public class Ventana extends javax.swing.JFrame {
         loadDB.setText("<html>CARGAR BASE DE<br>CONOCIMIENTOS</html>");
         loadDB.setToolTipText("");
         loadDB.setAlignmentY(0.0F);
-        loadDB.setBorder(new javax.swing.border.MatteBorder(null));
+        loadDB.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         loadDB.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         loadDB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,16 +163,29 @@ public class Ventana extends javax.swing.JFrame {
         });
         getContentPane().add(loadDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 140, 50));
 
+        jTextField1.setEditable(false);
+        jTextField1.setBackground(new java.awt.Color(255, 255, 227));
+        jTextField1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(184, 85, 30)));
+        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 300, 50));
+
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Photos/Fondo safari.jpg"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 380));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     
     
     private void loadDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadDBActionPerformed
-        // TODO add your handling code here:
         StringBuilder db = new StringBuilder();
         try {
             File file = new File(getPath());
@@ -103,6 +196,7 @@ public class Ventana extends javax.swing.JFrame {
                 db.append(line);
                 db.append("\n");
             }
+            JOptionPane.showMessageDialog(null, "Archivo cargado con exito");
         } catch(FileNotFoundException ex){
             JOptionPane.showMessageDialog(null, 
                     "El archivo no existe o no se encuentra en la ruta especificada",
@@ -122,7 +216,66 @@ public class Ventana extends javax.swing.JFrame {
         
         
         
+        
     }//GEN-LAST:event_loadDBActionPerformed
+
+    private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
+        play.setVisible(false);
+        loadDB.setVisible(false);
+        jTextField1.setVisible(true);
+        siButton.setVisible(true);
+        noButton.setVisible(true);
+        jTextField1.setText(inicioRonda);
+    }//GEN-LAST:event_playActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void siButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siButtonActionPerformed
+        if (jTextField1.getText().equals(inicioRonda)){
+            aux = t.getRoot();
+            jTextField1.setText("¿"+aux.getData()+"?");
+        } else if (aux.esHoja()){
+            jTextField1.setText(adivinado);
+            siButton.setVisible(false);
+            noButton.setVisible(false);
+            continuarButton.setVisible(true);
+        } else {
+            aux = aux.getRight();
+            if (aux.esHoja()){
+            jTextField1.setText("¿Es un "+aux.getData()+"?");
+            } else {
+                jTextField1.setText("¿"+aux.getData()+"?");
+            }
+        }
+    }//GEN-LAST:event_siButtonActionPerformed
+
+    private void noButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noButtonActionPerformed
+        if (!aux.esHoja()){
+            aux = aux.getLeft();
+            if (aux.esHoja()){
+            jTextField1.setText("¿Es un "+aux.getData()+"?");
+            } else {
+                jTextField1.setText("¿"+aux.getData()+"?");
+            }
+        } else {
+            jTextField1.setText("Caramba no se que es");
+        }
+    }//GEN-LAST:event_noButtonActionPerformed
+
+    private void continuarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarButtonActionPerformed
+        jTextField1.setVisible(false);
+        siButton.setVisible(false);
+        noButton.setVisible(false);
+        continuarButton.setVisible(false);
+        play.setVisible(true);
+        loadDB.setVisible(true);
+    }//GEN-LAST:event_continuarButtonActionPerformed
+
+    private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enviarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,7 +314,13 @@ public class Ventana extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private javax.swing.JButton continuarButton;
+    private javax.swing.JButton enviarButton;
+    private javax.swing.JTextField inputTextField;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton loadDB;
+    private javax.swing.JButton noButton;
     private javax.swing.JButton play;
+    private javax.swing.JButton siButton;
     // End of variables declaration//GEN-END:variables
 }
