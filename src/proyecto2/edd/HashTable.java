@@ -13,6 +13,7 @@ package proyecto2.edd;
 public class HashTable {
     Nodo tabla[];  //array de nodos
     int size; //número primo (se tomó 10111)
+    Arbol t = new Arbol(); 
     
     public HashTable(int size){
         this.size = size; 
@@ -71,6 +72,9 @@ public class HashTable {
         return index; 
     }
     
+//    public void createHashTable(Nodo root){
+//        t.PreOrder(root);
+//    }
     
     
     public void insertar(String animal){
@@ -90,7 +94,7 @@ public class HashTable {
             while (temp.getNext() != null){
                 temp = temp.getNext(); 
                 if (temp.getData().equals(animal)){
-                    existe = true; 
+                    existe = true;
                 }
             }
             
@@ -100,15 +104,21 @@ public class HashTable {
             if (!existe){
                 Nodo nuevo = new Nodo(animal); 
                 temp.setNext(nuevo); 
+                System.out.println(posicion);
+                System.out.println(nuevo.getData());
             }
             
         } else {
             Nodo nuevo = new Nodo(animal); 
-            this.tabla[posicion] = nuevo;   
+            this.tabla[posicion] = nuevo;  
+            System.out.println(posicion);
+            System.out.println(nuevo.getData());
         }
+        
     }
     
     public Nodo buscar(String animal){
+        
         int posicion = hashing(animal); 
         Nodo temp = this.tabla[posicion]; 
         boolean existe = false; 

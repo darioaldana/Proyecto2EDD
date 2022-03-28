@@ -77,10 +77,7 @@ public class Nodo {
     }
     
     public boolean esHoja(){
-        if (this.getRight()==null && this.getLeft()==null){
-            return true;
-        }
-        return false;
+        return this.getRight()==null && this.getLeft()==null;
     }
 }
 

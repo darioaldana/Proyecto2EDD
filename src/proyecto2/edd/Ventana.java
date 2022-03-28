@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class Ventana extends javax.swing.JFrame {
     Arbol t = new Arbol(); 
+    HashTable s = new HashTable(10111); 
     Nodo aux = null;
     Boolean cargado = false;
     private final String inicioRonda = "Estas listo para jugar una ronda?";
@@ -71,6 +72,7 @@ public class Ventana extends javax.swing.JFrame {
         noButton = new javax.swing.JButton();
         continuarButton = new javax.swing.JButton();
         siButton = new javax.swing.JButton();
+        search = new javax.swing.JButton();
         play = new javax.swing.JButton();
         loadDB = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
@@ -136,6 +138,19 @@ public class Ventana extends javax.swing.JFrame {
         });
         getContentPane().add(siButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 40, 30));
 
+        search.setBackground(new java.awt.Color(255, 255, 204));
+        search.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        search.setText("BUSCAR");
+        search.setToolTipText("");
+        search.setAlignmentY(0.0F);
+        search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
+        getContentPane().add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 90, 30));
+
         play.setBackground(new java.awt.Color(255, 255, 204));
         play.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         play.setText("JUGAR");
@@ -147,7 +162,7 @@ public class Ventana extends javax.swing.JFrame {
                 playActionPerformed(evt);
             }
         });
-        getContentPane().add(play, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 90, 30));
+        getContentPane().add(play, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 90, 30));
 
         loadDB.setBackground(new java.awt.Color(255, 255, 204));
         loadDB.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
@@ -217,10 +232,13 @@ public class Ventana extends javax.swing.JFrame {
         
         
         
+        
+        
     }//GEN-LAST:event_loadDBActionPerformed
 
     private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
         play.setVisible(false);
+        search.setVisible(false);
         loadDB.setVisible(false);
         jTextField1.setVisible(true);
         siButton.setVisible(true);
@@ -260,7 +278,7 @@ public class Ventana extends javax.swing.JFrame {
                 jTextField1.setText("¿"+aux.getData()+"?");
             }
         } else {
-            jTextField1.setText("Caramba no se que es");
+            jTextField1.setText("¡Caramba! No sé qué es.");
         }
     }//GEN-LAST:event_noButtonActionPerformed
 
@@ -269,6 +287,7 @@ public class Ventana extends javax.swing.JFrame {
         siButton.setVisible(false);
         noButton.setVisible(false);
         continuarButton.setVisible(false);
+        search.setVisible(true);
         play.setVisible(true);
         loadDB.setVisible(true);
     }//GEN-LAST:event_continuarButtonActionPerformed
@@ -276,6 +295,14 @@ public class Ventana extends javax.swing.JFrame {
     private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_enviarButtonActionPerformed
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        
+    }//GEN-LAST:event_searchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,6 +348,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton loadDB;
     private javax.swing.JButton noButton;
     private javax.swing.JButton play;
+    private javax.swing.JButton search;
     private javax.swing.JButton siButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,7 +26,7 @@ public class Arbol {
     }
     
     public void insertRoot(String data) {
-        root = new Nodo(data);
+        this.root = new Nodo(data);
     }
     
     public void insertarIzq(String padre, String valorNuevo){
@@ -99,8 +99,20 @@ public class Arbol {
             //Se agregan ambos hijos. 
             insertarDer(lineInfo[0], lineInfo[2]);
             insertarIzq(lineInfo[0], lineInfo[1]);
-
+            
         }
+    }
+    
+    public void PreOrder(Nodo n, HashTable s){
+        if (n == null)
+            return;
+        if (n.getLeft() == null && n.getRight() == null){
+            System.out.println("\n########Añadimos:   " + n.getData());
+            s.insertar(n.getData());
+        }
+        
+        PreOrder(n.getLeft(), s);
+        PreOrder(n.getRight(), s);
     }
     
 }
