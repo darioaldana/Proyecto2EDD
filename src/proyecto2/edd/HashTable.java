@@ -72,10 +72,10 @@ public class HashTable {
         return index; 
     }
     
-//    public void createHashTable(Nodo root){
-//        t.PreOrder(root);
-//    }
-    
+    public void createHashTable(Nodo root, HashTable s){
+        t.PreOrder(root, s);
+    }
+
     
     public void insertar(String animal){
         int posicion = hashing(animal); 
@@ -118,23 +118,27 @@ public class HashTable {
     }
     
     public Nodo buscar(String animal){
-        
-        int posicion = hashing(animal); 
-        Nodo temp = this.tabla[posicion]; 
         boolean existe = false; 
-        if (temp.getNext() != null){
-            if (temp.getNext() == null){
-                existe = true; ////check checl checl 
-            } else {
-                while (temp.getNext() != null && !existe){
-                    if (temp.getData().equals(animal)){
-                        existe = true; 
-                    } else {
-                        temp = temp.getNext(); 
-                    }
+        int posicion = hashing(animal); 
+        
+        if (this.tabla[posicion] == null){
+            return null;
+        }
+        
+        Nodo temp = this.tabla[posicion];
+        
+        if (temp.getData().equals(animal)){
+            existe = true; 
+        } else {
+            while (temp.getNext() != null && !existe){
+                if (temp.getData().equals(animal)){
+                    existe = true; 
+                } else {
+                    temp = temp.getNext(); 
                 }
             }
         }
+        
         if (existe){
             return temp; 
         } else {

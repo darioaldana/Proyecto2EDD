@@ -115,4 +115,30 @@ public class Arbol {
         PreOrder(n.getRight(), s);
     }
     
+    public void agregarAnimal(Nodo hoja, String diferencia, String animalName, boolean rightChild){
+        Nodo newAnimal = new Nodo(animalName);
+        Nodo moveAnimal = new Nodo(hoja.getData());
+        hoja.setData(diferencia);
+        
+        if (rightChild){
+            hoja.setRight(newAnimal);
+            hoja.setLeft(moveAnimal);
+            System.out.println("\n Añadimos derecha: ");
+        }else {
+            hoja.setRight(moveAnimal);
+            hoja.setLeft(newAnimal);
+            System.out.println("\n Añadimos izquierda: ");
+        }
+        
+        PreOrder2(this.root);
+        
+    }
+    
+    public void PreOrder2(Nodo n){
+		if (n == null)
+			return;
+                System.out.println(n.getData());
+		PreOrder2(n.getLeft());
+		PreOrder2(n.getRight());
+	}
 }

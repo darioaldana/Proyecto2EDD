@@ -279,6 +279,43 @@ public class Ventana extends javax.swing.JFrame {
             }
         } else {
             jTextField1.setText("¡Caramba! No sé qué es.");
+            try{
+                String newAnimal = JOptionPane.showInputDialog(null, 
+                "¿Qué animal era?", 
+                "Agregar Animal", 
+                JOptionPane.QUESTION_MESSAGE).toLowerCase();
+                
+                String diferencia = JOptionPane.showInputDialog(null, 
+                "¿Qué diferencia a un " + aux.getData() + " y a un " + newAnimal + "?", 
+                "Agregar Animal", 
+                JOptionPane.QUESTION_MESSAGE).toLowerCase();
+                
+                int result = JOptionPane.showConfirmDialog(null,
+                        "¿Si el animal fuera un " + newAnimal + ", cuál sería la respuesta a la pregunta?", 
+                        "Agregar Animal",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+                
+                switch (result) {
+                    case JOptionPane.YES_OPTION:
+                        t.agregarAnimal(aux, diferencia, newAnimal, true);
+                        System.out.println("yes");
+                        break;
+                    case JOptionPane.NO_OPTION:
+                        t.agregarAnimal(aux, diferencia, newAnimal, false);
+                        System.out.println("no");
+                        break;
+                    default:
+                        break;
+                }
+                
+                s.insertar(newAnimal);
+
+            } catch (NullPointerException e){
+            
+            }
+            
+            System.out.println(aux.getData());
         }
     }//GEN-LAST:event_noButtonActionPerformed
 
@@ -299,9 +336,32 @@ public class Ventana extends javax.swing.JFrame {
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
         
+        s.createHashTable(t.root, s);
         
+        try{
+            String animal = JOptionPane.showInputDialog(null, 
+                "Ingrese el nombre del animal que desea buscar", 
+                "Búsqueda de Animal", 
+                JOptionPane.QUESTION_MESSAGE).toLowerCase();
         
-        
+            System.out.println(animal);
+            Nodo found = s.buscar(animal);
+            
+            if (found == null){
+                JOptionPane.showMessageDialog(null,
+                        "El animal buscado no existe en la base de datos",
+                        "Animal No Encontrado", 
+                        JOptionPane.WARNING_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "El animal sí existe en la base de datos",
+                        "Animal Encontrado", 
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        }catch (NullPointerException e) {
+            
+        }
+          
     }//GEN-LAST:event_searchActionPerformed
 
     /**
