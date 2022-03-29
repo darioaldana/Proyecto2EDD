@@ -20,7 +20,7 @@ public class Ventana extends javax.swing.JFrame {
     Arbol t = new Arbol(); 
     HashTable s = new HashTable(10111); 
     Nodo aux = null;
-    Boolean cargado = false;
+    Boolean dbCargada = true;
     private final String inicioRonda = "Estas listo para jugar una ronda?";
     private final String adivinado = "¡Qué fácil, ponlo más difícil la próxima vez!";
     private final String defecto = "vuela, ladra, caza\n" +
@@ -72,6 +72,7 @@ public class Ventana extends javax.swing.JFrame {
      * Inicializa la informacion del arbol y del hashtable
      */
     private void inicializar(){
+        this.dbCargada = false; 
         t.inicializar();
         s.vaciar();
     }
@@ -216,6 +217,7 @@ public class Ventana extends javax.swing.JFrame {
     
     
     private void loadDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadDBActionPerformed
+        inicializar();
         StringBuilder db = new StringBuilder();
         try {
             File file = new File(getPath());
@@ -226,7 +228,13 @@ public class Ventana extends javax.swing.JFrame {
                 db.append(line);
                 db.append("\n");
             }
-            JOptionPane.showMessageDialog(null, "Archivo cargado con exito");
+            JOptionPane.showMessageDialog(null, 
+                "Archivo cargado con exito",
+                "¡Éxito! Ya todo está listo",
+                JOptionPane.INFORMATION_MESSAGE);
+            
+            
+            
         } catch(FileNotFoundException ex){
             JOptionPane.showMessageDialog(null, 
                     "El archivo no existe o no se encuentra en la ruta especificada",
@@ -240,9 +248,9 @@ public class Ventana extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE); 
         }
         
-        System.out.println("HERE");
-        System.out.println(db);
-        inicializar();
+        
+        System.out.println("Base de datos cargada: \n" + db);
+        this.dbCargada = true; 
         t.createTree(db.toString().toLowerCase());
         
         
@@ -253,14 +261,22 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_loadDBActionPerformed
 
     private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
-        play.setVisible(false);
-        search.setVisible(false);
-        loadDB.setVisible(false);
-        jTextField1.setVisible(true);
-        siButton.setVisible(true);
-        noButton.setVisible(true);
-        inicializarButton.setVisible(false);
-        jTextField1.setText(inicioRonda);
+        if (this.dbCargada){
+            play.setVisible(false);
+            search.setVisible(false);
+            loadDB.setVisible(false);
+            jTextField1.setVisible(true);
+            siButton.setVisible(true);
+            noButton.setVisible(true);
+            inicializarButton.setVisible(false);
+            jTextField1.setText(inicioRonda);
+        } else {
+            JOptionPane.showMessageDialog(null, 
+                    "No existe base de datos. Cargue un archivo para iniciar el juego",
+                    "Base de datos no encontrada", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_playActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -354,40 +370,59 @@ public class Ventana extends javax.swing.JFrame {
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
         
-        s.createHashTable(t.root, s);
-        
-        try{
-            String animal = JOptionPane.showInputDialog(null, 
-                "Ingrese el nombre del animal que desea buscar", 
-                "Búsqueda de Animal", 
-                JOptionPane.QUESTION_MESSAGE).toLowerCase();
-        
-            System.out.println(animal);
-            Nodo found = s.buscar(animal);
-            
-            if (found == null){
-                JOptionPane.showMessageDialog(null,
-                        "El animal buscado no existe en la base de datos",
-                        "Animal No Encontrado", 
-                        JOptionPane.WARNING_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "El animal sí existe en la base de datos",
-                        "Animal Encontrado", 
-                        JOptionPane.INFORMATION_MESSAGE);
-            }
-        }catch (NullPointerException e) {
-            
+        if(dbCargada){
+            s.createHashTable(t.root, s);
+            try{
+                String animal = JOptionPane.showInputDialog(null, 
+                    "Ingrese el nombre del animal que desea buscar", 
+                    "Búsqueda de Animal", 
+                    JOptionPane.QUESTION_MESSAGE).toLowerCase();
+
+                System.out.println(animal);
+                Nodo found = s.buscar(animal);
+
+                if (found == null){
+                    JOptionPane.showMessageDialog(null,
+                            "El animal buscado no existe en la base de datos",
+                            "Animal No Encontrado", 
+                            JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "El animal sí existe en la base de datos",
+                            "Animal Encontrado", 
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+            }catch (NullPointerException e) {}
+        } else {JOptionPane.showMessageDialog(null, 
+                    "No existe base de datos. Cargue un archivo para poder buscar",
+                    "Base de datos no encontrada", 
+                    JOptionPane.ERROR_MESSAGE);
         }
           
     }//GEN-LAST:event_searchActionPerformed
 
     private void inicializarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inicializarButtonActionPerformed
-        inicializar();
-        JOptionPane.showMessageDialog(null,
-            "Base de conocimientos inicializada, cargue un archivo para jugar",
-            "Base de conocimientos inicializada",
-            JOptionPane.INFORMATION_MESSAGE);
+        
+        try{
+            int result = JOptionPane.showConfirmDialog(null,
+                "¿Está seguro de inicializar la base de datos?\nEsto borrará la información almacenada", 
+                "Inicializar Base de Conocimientos",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+            
+            if (result == JOptionPane.YES_OPTION){
+                inicializar();
+                JOptionPane.showMessageDialog(null,
+                    "Base de conocimientos inicializada. \nDebe cargar un archivo para jugar.",
+                    "Base de conocimientos inicializada",
+                    JOptionPane.INFORMATION_MESSAGE); 
+            }
+            
+        } catch (Exception e){
+            System.out.println("Vuelta a menú");
+        }
+        
+       
     }//GEN-LAST:event_inicializarButtonActionPerformed
 
     /**

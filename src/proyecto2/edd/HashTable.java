@@ -23,7 +23,6 @@ public class HashTable {
         }
     }
     
-    
     /**
      * 
      * @param animal [String]: va a hacer las funciones
@@ -73,7 +72,9 @@ public class HashTable {
     }
     
     public void createHashTable(Nodo root, HashTable s){
-        t.PreOrder(root, s);
+        System.out.println("\n-----Abrimos HashTable");
+        t.fillHashTablePreOrder(root, s);
+        System.out.println("\n-----Cerramos HashTable");
     }
 
     
@@ -88,6 +89,7 @@ public class HashTable {
             
             if (temp.getData().equals(animal)){
                 existe = true; 
+                System.out.println("    Ya existe. No se agrega.");
                 
             }
             
@@ -95,6 +97,7 @@ public class HashTable {
                 temp = temp.getNext(); 
                 if (temp.getData().equals(animal)){
                     existe = true;
+                    System.out.println("    Ya existe. No se agrega.");
                 }
             }
             
@@ -104,15 +107,15 @@ public class HashTable {
             if (!existe){
                 Nodo nuevo = new Nodo(animal); 
                 temp.setNext(nuevo); 
-                System.out.println(posicion);
-                System.out.println(nuevo.getData());
+                System.out.println("    Añadimos: " + animal);
+                System.out.println("        En posición: " + posicion);
             }
             
         } else {
             Nodo nuevo = new Nodo(animal); 
             this.tabla[posicion] = nuevo;  
-            System.out.println(posicion);
-            System.out.println(nuevo.getData());
+            System.out.println("    Añadimos: " + animal);
+            System.out.println("        En posición: " + posicion);
         }
         
     }

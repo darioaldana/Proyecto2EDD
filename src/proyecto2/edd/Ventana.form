@@ -37,7 +37,6 @@
           <Connection code="&quot;&lt;html&gt;Inicializar base de&lt;br&gt;conocimientos&lt;/html&gt;&quot;" type="code"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="actionCommand" type="java.lang.String" value="&lt;User Code&gt;"/>
         <Property name="alignmentY" type="float" value="0.0"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">

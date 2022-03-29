@@ -38,7 +38,7 @@ public class Arbol {
         Nodo n = buscar(root, padre);
         Nodo hijoIzq = new Nodo(valorNuevo); 
         n.setLeft(hijoIzq);
-        System.out.println("    IZQ  " + hijoIzq.getData() + "\n");
+        System.out.println("        IZQ:  " + hijoIzq.getData() + "\n");
     }
     
     public void insertarDer(String padre, String valorNuevo){
@@ -50,8 +50,8 @@ public class Arbol {
         Nodo n = buscar(root, padre);
         Nodo hijoDer = new Nodo(valorNuevo); 
         n.setRight(hijoDer);
-        System.out.println("PADRE  " + n.getData());
-        System.out.println("    DER  " + hijoDer.getData());
+        System.out.println("    PADRE:  " + n.getData());
+        System.out.println("        DER:  " + hijoDer.getData());
     }
    
     public Nodo buscar(Nodo n, String key){
@@ -75,6 +75,7 @@ public class Arbol {
      */
     public void createTree(String db){
         
+        System.out.println("\n\n ----------\nComenzamos a crear árbol\n");
         String[] dbLines = db.split("\n"); 
         /**
          * dbLines es un array de Strings, cada elemento
@@ -94,25 +95,27 @@ public class Arbol {
             if (esVacio(getRoot())){
                 insertRoot(lineInfo[0]); 
             } 
-            System.out.println(i + "---"+dbLines[i]);
+            
+            System.out.println("Línea " + i + ":  "+dbLines[i]);
             
             //Se agregan ambos hijos. 
             insertarDer(lineInfo[0], lineInfo[2]);
             insertarIzq(lineInfo[0], lineInfo[1]);
             
         }
+        System.out.println("Terminamos de crear arbol\n----------\n");
     }
     
-    public void PreOrder(Nodo n, HashTable s){
+    public void fillHashTablePreOrder(Nodo n, HashTable s){
         if (n == null)
             return;
         if (n.getLeft() == null && n.getRight() == null){
-            System.out.println("\n########Añadimos:   " + n.getData());
+            System.out.println("\n  Evaluamos para añadir:   " + n.getData());
             s.insertar(n.getData());
         }
         
-        PreOrder(n.getLeft(), s);
-        PreOrder(n.getRight(), s);
+        fillHashTablePreOrder(n.getLeft(), s);
+        fillHashTablePreOrder(n.getRight(), s);
     }
     
     public void agregarAnimal(Nodo hoja, String diferencia, String animalName, boolean rightChild){
@@ -130,16 +133,16 @@ public class Arbol {
             System.out.println("\n Añadimos izquierda: ");
         }
         
-        PreOrder2(this.root);
+        PreOrder(this.root);
         
     }
     
-    public void PreOrder2(Nodo n){
+    public void PreOrder(Nodo n){
 		if (n == null)
 			return;
                 System.out.println(n.getData());
-		PreOrder2(n.getLeft());
-		PreOrder2(n.getRight());
+		PreOrder(n.getLeft());
+		PreOrder(n.getRight());
 	}
 
     void inicializar() {
