@@ -41,6 +41,8 @@ public class Ventana extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         initComponents();
+        loadDB.setVisible(false);
+        inicializarButton.setVisible(false); 
         jTextField1.setVisible(false);
         siButton.setVisible(false);
         noButton.setVisible(false);
@@ -87,33 +89,43 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        inicializarButton = new javax.swing.JButton();
+        line = new javax.swing.JTextField();
+        title = new javax.swing.JLabel();
+        adminDB = new javax.swing.JButton();
         continuarButton = new javax.swing.JButton();
         siButton = new javax.swing.JButton();
         noButton = new javax.swing.JButton();
         search = new javax.swing.JButton();
         play = new javax.swing.JButton();
         loadDB = new javax.swing.JButton();
+        inicializarButton = new javax.swing.JButton();
+        photo = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        inicializarButton.setBackground(new java.awt.Color(255, 255, 204));
-        inicializarButton.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        inicializarButton.setText("<html>Inicializar base de<br>conocimientos</html>");
-        inicializarButton.setToolTipText("");
-        inicializarButton.setActionCommand("<User Code>");
-        inicializarButton.setAlignmentY(0.0F);
-        inicializarButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(207, 83, 0)));
-        inicializarButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        inicializarButton.addActionListener(new java.awt.event.ActionListener() {
+        line.setBackground(new java.awt.Color(0, 102, 0));
+        getContentPane().add(line, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 320, 10));
+
+        title.setFont(new java.awt.Font("Bahnschrift", 3, 68)); // NOI18N
+        title.setText("Akinator");
+        getContentPane().add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 280, -1));
+
+        adminDB.setBackground(new java.awt.Color(255, 255, 204));
+        adminDB.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        adminDB.setText("<html>ADMINISTRAR BASE<br>DE CONOCIMIENTOS</html>");
+        adminDB.setToolTipText("");
+        adminDB.setAlignmentY(0.0F);
+        adminDB.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(207, 83, 0)));
+        adminDB.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        adminDB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inicializarButtonActionPerformed(evt);
+                adminDBActionPerformed(evt);
             }
         });
-        getContentPane().add(inicializarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 140, 50));
+        getContentPane().add(adminDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 150, 50));
 
         continuarButton.setBackground(new java.awt.Color(255, 255, 204));
         continuarButton.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
@@ -126,7 +138,7 @@ public class Ventana extends javax.swing.JFrame {
                 continuarButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(continuarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 90, 30));
+        getContentPane().add(continuarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 90, 30));
 
         siButton.setBackground(new java.awt.Color(255, 255, 224));
         siButton.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
@@ -139,7 +151,7 @@ public class Ventana extends javax.swing.JFrame {
                 siButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(siButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 40, 30));
+        getContentPane().add(siButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 40, 30));
 
         noButton.setBackground(new java.awt.Color(255, 255, 224));
         noButton.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
@@ -152,11 +164,11 @@ public class Ventana extends javax.swing.JFrame {
                 noButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(noButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 40, 30));
+        getContentPane().add(noButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 40, 30));
 
         search.setBackground(new java.awt.Color(255, 255, 204));
         search.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        search.setText("BUSCAR");
+        search.setText("BUSCAR ANIMAL");
         search.setToolTipText("");
         search.setAlignmentY(0.0F);
         search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -165,7 +177,7 @@ public class Ventana extends javax.swing.JFrame {
                 searchActionPerformed(evt);
             }
         });
-        getContentPane().add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 90, 30));
+        getContentPane().add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 150, 50));
 
         play.setBackground(new java.awt.Color(255, 255, 204));
         play.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
@@ -178,7 +190,7 @@ public class Ventana extends javax.swing.JFrame {
                 playActionPerformed(evt);
             }
         });
-        getContentPane().add(play, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 90, 30));
+        getContentPane().add(play, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 150, 50));
 
         loadDB.setBackground(new java.awt.Color(255, 255, 204));
         loadDB.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
@@ -192,7 +204,24 @@ public class Ventana extends javax.swing.JFrame {
                 loadDBActionPerformed(evt);
             }
         });
-        getContentPane().add(loadDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 140, 50));
+        getContentPane().add(loadDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 140, 50));
+
+        inicializarButton.setBackground(new java.awt.Color(255, 255, 204));
+        inicializarButton.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        inicializarButton.setText("<html>Inicializar base de<br>conocimientos</html>");
+        inicializarButton.setToolTipText("");
+        inicializarButton.setAlignmentY(0.0F);
+        inicializarButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(207, 83, 0)));
+        inicializarButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        inicializarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inicializarButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(inicializarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 140, 50));
+
+        photo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Photos/Diego.png"))); // NOI18N
+        getContentPane().add(photo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 200, 280));
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(255, 255, 227));
@@ -205,9 +234,10 @@ public class Ventana extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 300, 50));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 300, 50));
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Photos/Fondo safari.jpg"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Photos/background.jpg"))); // NOI18N
+        background.setText("akinator");
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 380));
 
         pack();
@@ -248,6 +278,11 @@ public class Ventana extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE); 
         }
         
+        search.setVisible(true);
+        play.setVisible(true);
+        adminDB.setVisible(true);
+        loadDB.setVisible(false);
+        inicializarButton.setVisible(false);
         
         System.out.println("Base de datos cargada: \n" + db);
         this.dbCargada = true; 
@@ -269,6 +304,7 @@ public class Ventana extends javax.swing.JFrame {
             siButton.setVisible(true);
             noButton.setVisible(true);
             inicializarButton.setVisible(false);
+            adminDB.setVisible(false);
             jTextField1.setText(inicioRonda);
         } else {
             JOptionPane.showMessageDialog(null, 
@@ -363,8 +399,9 @@ public class Ventana extends javax.swing.JFrame {
         continuarButton.setVisible(false);
         search.setVisible(true);
         play.setVisible(true);
-        loadDB.setVisible(true);
-        inicializarButton.setVisible(true);
+        loadDB.setVisible(false);
+        inicializarButton.setVisible(false);
+        adminDB.setVisible(true);
     }//GEN-LAST:event_continuarButtonActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
@@ -422,8 +459,24 @@ public class Ventana extends javax.swing.JFrame {
             System.out.println("Vuelta a menú");
         }
         
+        search.setVisible(true);
+        play.setVisible(true);
+        adminDB.setVisible(true);
+        loadDB.setVisible(false);
+        inicializarButton.setVisible(false);
+        
        
     }//GEN-LAST:event_inicializarButtonActionPerformed
+
+    private void adminDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminDBActionPerformed
+        // TODO add your handling code here:
+        loadDB.setVisible(true);
+        inicializarButton.setVisible(true);
+        play.setVisible(false);
+        adminDB.setVisible(false);
+        search.setVisible(false);
+        
+    }//GEN-LAST:event_adminDBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -461,15 +514,19 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton adminDB;
     private javax.swing.JLabel background;
     private javax.swing.JButton continuarButton;
     private javax.swing.JButton inicializarButton;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField line;
     private javax.swing.JButton loadDB;
     private javax.swing.JButton noButton;
+    private javax.swing.JLabel photo;
     private javax.swing.JButton play;
     private javax.swing.JButton search;
     private javax.swing.JButton siButton;
+    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 
 }
