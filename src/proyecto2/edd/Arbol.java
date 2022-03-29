@@ -141,4 +141,8 @@ public class Arbol {
 		PreOrder2(n.getLeft());
 		PreOrder2(n.getRight());
 	}
+
+    void inicializar() {
+        this.root = null; 
+    }
 }
