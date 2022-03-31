@@ -24,6 +24,9 @@ public class HashTable {
     }
     
     /**
+     * Description: Es la función que devuelve el valor de
+     *      la posición que tendrá el valor almacenado en 
+     *      la tabla en cuestión. 
      * 
      * @param animal [String]: va a hacer las funciones
      *          de clave del objeto guardado en la tabla. 
@@ -71,6 +74,14 @@ public class HashTable {
         return index; 
     }
     
+    /**
+     * Description: Crea la HashTable y ejecuta (con la función
+     *      fillHashTablePreOrder) un recorrido en preorden para
+     *      determinar si hay nodos que no han sido ingresados. 
+     * 
+     * @param root, nodo raíz
+     * @param s, objeto HashTable
+     */
     public void createHashTable(Nodo root, HashTable s){
         System.out.println("\n-----Abrimos HashTable");
         t.fillHashTablePreOrder(root, s);
@@ -78,6 +89,14 @@ public class HashTable {
     }
 
     
+    /**
+     * Description: inserta el nombre de un animal en la tabla, 
+     *      utiliza la función de hashing para determinar la 
+     *      posición del animal y tiene un boolean para saber si existe. 
+     *      Además, con nodos auxiliares para solucionar colisiones. 
+     * 
+     * @param animal: valor que se agregará. 
+     */
     public void insertar(String animal){
         int posicion = hashing(animal); 
         boolean existe = false; 
@@ -120,6 +139,17 @@ public class HashTable {
         
     }
     
+    /**
+     * Description: Función que busca en la HashTable. 
+     *      Utiliza la función hashing para determinar el
+     *      índice e inmediatamente busca en la posición
+     *      en cuestión. 
+     * 
+     * @param animal: valor buscado
+     * 
+     * @return: nodo con el valor buscado o null, depende de si
+     *      éste existe en la HashTable. 
+     */
     public Nodo buscar(String animal){
         boolean existe = false; 
         int posicion = hashing(animal); 

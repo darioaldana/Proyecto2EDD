@@ -287,6 +287,7 @@ public class Ventana extends javax.swing.JFrame {
     
     private void loadDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadDBActionPerformed
         inicializar();
+        
         StringBuilder db = new StringBuilder();
         try {
             File file = new File(getPath());
@@ -298,7 +299,7 @@ public class Ventana extends javax.swing.JFrame {
                 db.append("\n");
             }
             JOptionPane.showMessageDialog(null, 
-                "Archivo cargado con exito",
+                "Archivo cargado con éxito.",
                 "¡Éxito! Ya todo está listo",
                 JOptionPane.INFORMATION_MESSAGE);
             
@@ -413,16 +414,16 @@ public class Ventana extends javax.swing.JFrame {
                 switch (result) {
                     case JOptionPane.YES_OPTION:
                         t.agregarAnimal(aux, diferencia, newAnimal, true);
-                        System.out.println("yes");
                         break;
                     case JOptionPane.NO_OPTION:
                         t.agregarAnimal(aux, diferencia, newAnimal, false);
-                        System.out.println("no");
                         break;
                     default:
                         break;
                 }
                 
+                
+                jTextField1.setText("¡Mil gracias! Ahorita soy más inteligente.");
                 s.insertar(newAnimal);
 
             } catch (NullPointerException e){
@@ -629,10 +630,19 @@ public class Ventana extends javax.swing.JFrame {
             System.out.println("Vuelta a menú");
         }
         } else {JOptionPane.showMessageDialog(null, 
-                    "No existe base de datos. Cargue un archivo para poder buscar",
+                    "No existe base de datos. Cargue un archivo para poder buscar.",
                     "Base de datos no encontrada", 
                     JOptionPane.ERROR_MESSAGE);
         }
+        
+        
+        search.setVisible(true);
+        play.setVisible(true);
+        adminDB.setVisible(true);
+        loadDB.setVisible(false);
+        inicializarButton.setVisible(false);
+        GuardarInfo.setVisible (false);
+        printDB.setVisible(false);
 
     }//GEN-LAST:event_printDBActionPerformed
 

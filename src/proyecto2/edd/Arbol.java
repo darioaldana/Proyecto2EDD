@@ -32,11 +32,23 @@ public class Arbol {
 	}
     
     
-    
+    /**
+     * Descripción: Empezando de la raíz, cuenta cuántas 
+     *      relaciones padre-hijo pasan hasta llegar al 
+     *      nodo del cual se desea saber el nivel. 
+     * 
+     * 
+     * @param current: nodo examinado, variará su valor
+     *          según el ambiente de iteración. 
+     * @param key: valor del nodo del cual se desea saber
+     *          su nivel.
+     * @param counter: contador de cuantas relaciones padre-hijo
+     *          se hallan antes de llegar al objetivo. 
+     * 
+     * @return x: devuelve el nivel del nodo aumentado en una unidad. 
+     */
     public int getLevel(Nodo current,String key,int counter){
-        
-        int x; 
-        
+        int x;
         if(current == null){return 0;}
         
         if(current.getData().equals(key)){
@@ -44,9 +56,7 @@ public class Arbol {
         }
 
         x = getLevel(current.getLeft(),key, counter+1);
-
         if(x!=0){return x;}
-
         x = getLevel(current.getRight(),key,counter + 1);
         return x;
     }
@@ -81,6 +91,16 @@ public class Arbol {
         System.out.println("        DER:  " + hijoDer.getData());
     }
    
+    /**
+     * Description: Pasándole una clave, recorrerá el árbol
+     *      recursivamente hasta encontrar el nodo que contiene
+     *      a dicha clave. 
+     * 
+     * @param n: nodo examinado. 
+     * @param key: clave buscada, valor dentro del nodo. 
+     * @return found ó nodo: el nodo que contiene esa clave,
+     *      si no se encuentra el nodo es null. 
+     */
     public Nodo buscar(Nodo n, String key){
         Nodo found = null; 
         if (n == null)
@@ -96,6 +116,11 @@ public class Arbol {
     
 
     /**
+     * Descripción: Toma el mega string extraído de la 
+     *      base de conocimientos y crea un array donde
+     *      cada elemento es una línea, cada línea se convierte
+     *      en un array también para asignar los valores de 
+     *      padres e hijos (derecho o izquierdo) según corresponda. 
      * 
      * @param db [String] mega string con la info
      *          del txt separada por líneas. 
@@ -133,6 +158,16 @@ public class Arbol {
         System.out.println("Terminamos de crear arbol\n----------\n");
     }
     
+    
+    /**
+     * Descripción: Recorre el arbol en preorden para ir
+     *      chequeando si los valores ya fueron agregados o
+     *      no a la HashTable. 
+     * 
+     * @param n: nodo a evaluar, se examinará si su valor 
+     *      se encuentra en la tabla de dispersión.
+     * @param s: TDA de la HashTable
+     */
     public void fillHashTablePreOrder(Nodo n, HashTable s){
         if (n == null)
             return;
@@ -145,6 +180,27 @@ public class Arbol {
         fillHashTablePreOrder(n.getRight(), s);
     }
     
+    
+    /**
+     * Description: Cuando el adivino no logra su objetivo, 
+     *      se llama a esta función para ampliar la base de
+     *      conocimientos del juego. 
+     * 
+     * 
+     * @param hoja: nodo que contiene el intento de adivinar 
+     *          del Akinator (que fue incorrecto). 
+     * 
+     * @param diferencia: representa la diferencia entre
+     *          la respuesta que arrojó el Akinator y la
+     *          respuesta que dio el usuario. 
+     * 
+     * @param animalName: nombre del animal (respuesta correcta
+     *          de la ronda dada por el usuario). 
+     * 
+     * @param rightChild: boolean que determina si el animal que se 
+     *          añadirá a la derecha o a la izquierda, es decir,
+     *          si cumple o no con la condición. 
+     */
     public void agregarAnimal(Nodo hoja, String diferencia, String animalName, boolean rightChild){
         Nodo newAnimal = new Nodo(animalName);
         Nodo moveAnimal = new Nodo(hoja.getData());
@@ -160,10 +216,20 @@ public class Arbol {
             System.out.println("\n Añadimos izquierda: ");
         }
         
+        System.out.println("\n--------------");
+        System.out.println("Comprobación del nuevo árbol:  ");
         PreOrder(this.root);
         
     }
     
+    /**
+     * Description: recorrido de preorden sencillo con impresión
+     *          en la terminal, usado para comprobar durante la 
+     *          realización del programa. 
+     * 
+     * @param n: nodo raiz del árbol inicialmente, variará con 
+     *          las recursiones
+     */
     public void PreOrder(Nodo n){
 		if (n == null)
 			return;
@@ -172,10 +238,28 @@ public class Arbol {
 		PreOrder(n.getRight());
 	}
 
+    
+    /**
+     * Description: Vacía el arbol. 
+     */
     void inicializar() {
         this.root = null; 
     }
     
+    
+    /**
+     * Description: Se genera el recorrido en preorden, donde cada
+     *      valor es separado con "/". Además, se especifica quién
+     *      es hijo izquierdo e hijo derecho con los prefijos "Si: " 
+     *      y "No: " antes de imprimir el valor. 
+     * 
+     * @param n: nodo evaluado según el ambiente de la recursión. 
+     * @param sb: StringBuilder donde se guardará todo el recorrido. 
+     * @param answer: prefijo en cuestión, determina si es hijo izquierdo
+     *          o derecho. 
+     * 
+     * @return recorrido entero en preorden del árbol. 
+     */
     public String printPreOrder(Nodo n, StringBuilder sb, String answer){
         if (n != null){
             sb.append(answer);
@@ -191,11 +275,20 @@ public class Arbol {
         }
     }
     
+    /**
+     * Description: Se genera una lista multinivel a partir del 
+     *      recorrido en preorden. Otra manera para ilustrar cómo
+     *      es el árbol creado. 
+     * 
+     * @param preorden recorrido entero en preorden del árbol. 
+     * 
+     * @return finalStr: String que será mostrado en pantalla 
+     *      tiene el formato de una lista multinivel. 
+     */
     public String print(String preorden){
         
         String[] nodos = preorden.split("/");
-        int indent; 
-        Nodo n;
+        int indent;
         String finalStr = "";
         String prefix = ""; 
         String key = "";
@@ -204,6 +297,10 @@ public class Arbol {
 
             key = nodos[i];
             
+            /** El siguiente condicional es porque la raíz no
+             * tiene prefijo. Se define el prefijo que puede ser
+             * "Si: " o "No: ", ambos de cuatro caracteres. 
+             */
             if (i!=0){
                 prefix = "";
                 for (int j = 0; j < 4; j++) {
@@ -214,7 +311,14 @@ public class Arbol {
                 nodos[i] = key.replace(s, s.toUpperCase());
             }
             
-            
+            /**
+             * El prefijo sirve a la hora de imprimirlo, pero hay
+             * que recordar que en el nodo del árbol como tal, esos
+             * valores no llevan ese prefijo. Por ende, para determinar 
+             * la sangría, se debe mandar la clave sin el prefijo; pero 
+             * para crear el String que será mostrado en pantalla sí se 
+             * usa el prefijo. 
+             */
             key = key.replace(prefix, "");
             indent = getLevel(root, key, 1)-1;
             finalStr = finalStr + ("│        ".repeat(indent)) + nodos[i] + "\n"; 
@@ -225,6 +329,18 @@ public class Arbol {
         
     }
     
+    /**
+     * Description: Crea el archivo de texto que será guardado
+     *      posteriormente. 
+     * 
+     * @param sb StringBuilder que almacena la información durante
+     *          las recursiones para después utilizrla y agregarla
+     *          a una base de datos. 
+     * 
+     * @param current Nodo que se está evaluando en el momento.
+     * 
+     * @return sb, el StringBuilder pero pasado a String.
+     */
     public String createTxt(StringBuilder sb, Nodo current){
 
         String line = "";
