@@ -42,7 +42,8 @@ public class Ventana extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         initComponents();
         loadDB.setVisible(false);
-        inicializarButton.setVisible(false); 
+        inicializarButton.setVisible(false);
+        GuardarInfo.setVisible (false);
         jTextField1.setVisible(false);
         siButton.setVisible(false);
         noButton.setVisible(false);
@@ -101,6 +102,7 @@ public class Ventana extends javax.swing.JFrame {
         inicializarButton = new javax.swing.JButton();
         photo = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        GuardarInfo = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -221,7 +223,10 @@ public class Ventana extends javax.swing.JFrame {
         getContentPane().add(inicializarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 140, 50));
 
         photo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Photos/Diego.png"))); // NOI18N
-        getContentPane().add(photo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 200, 280));
+        photo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        photo.setMaximumSize(new java.awt.Dimension(81, 21));
+        photo.setMinimumSize(new java.awt.Dimension(81, 21));
+        getContentPane().add(photo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 200, 280));
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(255, 255, 227));
@@ -235,6 +240,21 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 300, 50));
+
+        GuardarInfo.setBackground(new java.awt.Color(255, 255, 204));
+        GuardarInfo.setFont(new java.awt.Font("Bahnschrift", 0, 10)); // NOI18N
+        GuardarInfo.setText("ALMACENAR BASE DE CONOCIMIENTOS");
+        GuardarInfo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        GuardarInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        GuardarInfo.setMaximumSize(new java.awt.Dimension(81, 21));
+        GuardarInfo.setMinimumSize(new java.awt.Dimension(81, 21));
+        GuardarInfo.setPreferredSize(new java.awt.Dimension(81, 21));
+        GuardarInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarInfoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(GuardarInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 150, 40));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Photos/background.jpg"))); // NOI18N
         background.setText("akinator");
@@ -283,6 +303,7 @@ public class Ventana extends javax.swing.JFrame {
         adminDB.setVisible(true);
         loadDB.setVisible(false);
         inicializarButton.setVisible(false);
+        GuardarInfo.setVisible (false);
         
         System.out.println("Base de datos cargada: \n" + db);
         this.dbCargada = true; 
@@ -304,6 +325,7 @@ public class Ventana extends javax.swing.JFrame {
             siButton.setVisible(true);
             noButton.setVisible(true);
             inicializarButton.setVisible(false);
+            GuardarInfo.setVisible (false);
             adminDB.setVisible(false);
             jTextField1.setText(inicioRonda);
         } else {
@@ -401,6 +423,7 @@ public class Ventana extends javax.swing.JFrame {
         play.setVisible(true);
         loadDB.setVisible(false);
         inicializarButton.setVisible(false);
+        GuardarInfo.setVisible (false);
         adminDB.setVisible(true);
     }//GEN-LAST:event_continuarButtonActionPerformed
 
@@ -464,6 +487,7 @@ public class Ventana extends javax.swing.JFrame {
         adminDB.setVisible(true);
         loadDB.setVisible(false);
         inicializarButton.setVisible(false);
+        GuardarInfo.setVisible (false);
         
        
     }//GEN-LAST:event_inicializarButtonActionPerformed
@@ -472,11 +496,45 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
         loadDB.setVisible(true);
         inicializarButton.setVisible(true);
+        GuardarInfo.setVisible (true);
         play.setVisible(false);
         adminDB.setVisible(false);
         search.setVisible(false);
         
     }//GEN-LAST:event_adminDBActionPerformed
+
+    private void GuardarInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarInfoActionPerformed
+    
+           try{
+            int result = JOptionPane.showConfirmDialog(null,
+                "¿Está seguro de almacenar la base de conocimientos?", 
+                "Almacenando Base de Conocimientos",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+            
+            if (result == JOptionPane.YES_OPTION){
+                inicializar();
+                JOptionPane.showMessageDialog(null,
+                    "Base de conococimientos almacenada.",
+                    "Base de conocimientos almacenada",
+                    JOptionPane.INFORMATION_MESSAGE); 
+            }
+            
+        } catch (Exception e){
+            System.out.println("Vuelta a menú");
+        }
+        
+        search.setVisible(true);
+        play.setVisible(true);
+        adminDB.setVisible(true);
+        loadDB.setVisible(false);
+        inicializarButton.setVisible(false);
+        GuardarInfo.setVisible (false);
+        
+       
+    
+            
+    }//GEN-LAST:event_GuardarInfoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -514,6 +572,7 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton GuardarInfo;
     private javax.swing.JButton adminDB;
     private javax.swing.JLabel background;
     private javax.swing.JButton continuarButton;
