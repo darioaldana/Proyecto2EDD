@@ -44,6 +44,7 @@ public class Ventana extends javax.swing.JFrame {
         loadDB.setVisible(false);
         inicializarButton.setVisible(false);
         GuardarInfo.setVisible (false);
+        printDB.setVisible(false);
         jTextField1.setVisible(false);
         siButton.setVisible(false);
         noButton.setVisible(false);
@@ -92,6 +93,7 @@ public class Ventana extends javax.swing.JFrame {
 
         line = new javax.swing.JTextField();
         title = new javax.swing.JLabel();
+        printDB = new javax.swing.JButton();
         adminDB = new javax.swing.JButton();
         continuarButton = new javax.swing.JButton();
         siButton = new javax.swing.JButton();
@@ -100,9 +102,9 @@ public class Ventana extends javax.swing.JFrame {
         play = new javax.swing.JButton();
         loadDB = new javax.swing.JButton();
         inicializarButton = new javax.swing.JButton();
+        GuardarInfo = new javax.swing.JButton();
         photo = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        GuardarInfo = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -114,6 +116,20 @@ public class Ventana extends javax.swing.JFrame {
         title.setFont(new java.awt.Font("Bahnschrift", 3, 68)); // NOI18N
         title.setText("Akinator");
         getContentPane().add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 280, -1));
+
+        printDB.setBackground(new java.awt.Color(255, 255, 204));
+        printDB.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        printDB.setText("<html>Ver base de<br>conocimientos</html>");
+        printDB.setToolTipText("");
+        printDB.setAlignmentY(0.0F);
+        printDB.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 51, 0)));
+        printDB.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        printDB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printDBActionPerformed(evt);
+            }
+        });
+        getContentPane().add(printDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 140, 50));
 
         adminDB.setBackground(new java.awt.Color(255, 255, 204));
         adminDB.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
@@ -173,7 +189,7 @@ public class Ventana extends javax.swing.JFrame {
         search.setText("BUSCAR ANIMAL");
         search.setToolTipText("");
         search.setAlignmentY(0.0F);
-        search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        search.setBorder(new javax.swing.border.MatteBorder(null));
         search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchActionPerformed(evt);
@@ -206,7 +222,7 @@ public class Ventana extends javax.swing.JFrame {
                 loadDBActionPerformed(evt);
             }
         });
-        getContentPane().add(loadDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 140, 50));
+        getContentPane().add(loadDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 140, 50));
 
         inicializarButton.setBackground(new java.awt.Color(255, 255, 204));
         inicializarButton.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
@@ -220,7 +236,22 @@ public class Ventana extends javax.swing.JFrame {
                 inicializarButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(inicializarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 140, 50));
+        getContentPane().add(inicializarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 140, 50));
+
+        GuardarInfo.setBackground(new java.awt.Color(255, 255, 204));
+        GuardarInfo.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        GuardarInfo.setText("<html>Almacenar base de<br>conocimientos</html>");
+        GuardarInfo.setBorder(new javax.swing.border.MatteBorder(null));
+        GuardarInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        GuardarInfo.setMaximumSize(new java.awt.Dimension(81, 21));
+        GuardarInfo.setMinimumSize(new java.awt.Dimension(81, 21));
+        GuardarInfo.setPreferredSize(new java.awt.Dimension(81, 21));
+        GuardarInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarInfoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(GuardarInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 140, 50));
 
         photo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Photos/Diego.png"))); // NOI18N
         photo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -240,21 +271,6 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 300, 50));
-
-        GuardarInfo.setBackground(new java.awt.Color(255, 255, 204));
-        GuardarInfo.setFont(new java.awt.Font("Bahnschrift", 0, 10)); // NOI18N
-        GuardarInfo.setText("ALMACENAR BASE DE CONOCIMIENTOS");
-        GuardarInfo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        GuardarInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        GuardarInfo.setMaximumSize(new java.awt.Dimension(81, 21));
-        GuardarInfo.setMinimumSize(new java.awt.Dimension(81, 21));
-        GuardarInfo.setPreferredSize(new java.awt.Dimension(81, 21));
-        GuardarInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarInfoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(GuardarInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 150, 40));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Photos/background.jpg"))); // NOI18N
         background.setText("akinator");
@@ -304,16 +320,12 @@ public class Ventana extends javax.swing.JFrame {
         loadDB.setVisible(false);
         inicializarButton.setVisible(false);
         GuardarInfo.setVisible (false);
+        printDB.setVisible(false);
         
         System.out.println("Base de datos cargada: \n" + db);
         this.dbCargada = true; 
         t.createTree(db.toString().toLowerCase());
-        
-        
-        
-        
-        
-        
+           
     }//GEN-LAST:event_loadDBActionPerformed
 
     private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
@@ -325,6 +337,7 @@ public class Ventana extends javax.swing.JFrame {
             siButton.setVisible(true);
             noButton.setVisible(true);
             inicializarButton.setVisible(false);
+            printDB.setVisible(false);
             GuardarInfo.setVisible (false);
             adminDB.setVisible(false);
             jTextField1.setText(inicioRonda);
@@ -361,13 +374,16 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_siButtonActionPerformed
 
     private void noButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noButtonActionPerformed
+        try{
+        
         if (!aux.esHoja()){
             aux = aux.getLeft();
-            if (aux.esHoja()){
+        if (aux.esHoja()){
             jTextField1.setText("¿Es un "+aux.getData()+"?");
-            } else {
+        } else {
                 jTextField1.setText("¿"+aux.getData()+"?");
             }
+        
         } else {
             jTextField1.setText("¡Caramba! No sé qué es.");
             siButton.setVisible(false);
@@ -412,6 +428,19 @@ public class Ventana extends javax.swing.JFrame {
             
             System.out.println(aux.getData());
         }
+        }catch (NullPointerException x){
+            jTextField1.setVisible(false);
+            siButton.setVisible(false);
+            noButton.setVisible(false);
+            continuarButton.setVisible(false);
+            search.setVisible(true);
+            play.setVisible(true);
+            loadDB.setVisible(false);
+            inicializarButton.setVisible(false);
+            GuardarInfo.setVisible (false);
+            printDB.setVisible(false);
+            adminDB.setVisible(true);
+        }
     }//GEN-LAST:event_noButtonActionPerformed
 
     private void continuarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarButtonActionPerformed
@@ -424,6 +453,7 @@ public class Ventana extends javax.swing.JFrame {
         loadDB.setVisible(false);
         inicializarButton.setVisible(false);
         GuardarInfo.setVisible (false);
+        printDB.setVisible(false);
         adminDB.setVisible(true);
     }//GEN-LAST:event_continuarButtonActionPerformed
 
@@ -488,6 +518,7 @@ public class Ventana extends javax.swing.JFrame {
         loadDB.setVisible(false);
         inicializarButton.setVisible(false);
         GuardarInfo.setVisible (false);
+        printDB.setVisible(false);
         
        
     }//GEN-LAST:event_inicializarButtonActionPerformed
@@ -497,6 +528,7 @@ public class Ventana extends javax.swing.JFrame {
         loadDB.setVisible(true);
         inicializarButton.setVisible(true);
         GuardarInfo.setVisible (true);
+        printDB.setVisible(true);
         play.setVisible(false);
         adminDB.setVisible(false);
         search.setVisible(false);
@@ -504,7 +536,8 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_adminDBActionPerformed
 
     private void GuardarInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarInfoActionPerformed
-    
+        
+        if (dbCargada){
            try{
             int result = JOptionPane.showConfirmDialog(null,
                 "¿Está seguro de almacenar la base de conocimientos?", 
@@ -523,6 +556,11 @@ public class Ventana extends javax.swing.JFrame {
         } catch (Exception e){
             System.out.println("Vuelta a menú");
         }
+        } else {JOptionPane.showMessageDialog(null, 
+                    "No existe base de datos. Cargue un archivo para poder guardar.",
+                    "Base de datos no encontrada", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
         
         search.setVisible(true);
         play.setVisible(true);
@@ -530,11 +568,54 @@ public class Ventana extends javax.swing.JFrame {
         loadDB.setVisible(false);
         inicializarButton.setVisible(false);
         GuardarInfo.setVisible (false);
+        printDB.setVisible(false);
         
        
     
             
     }//GEN-LAST:event_GuardarInfoActionPerformed
+
+    private void printDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printDBActionPerformed
+        // TODO add your handling code here:
+        
+        if (dbCargada){
+        try {
+            String[] options = new String[] {"Diagrama", "En viñetas"};
+            int result = JOptionPane.showOptionDialog(null, 
+                    "Seleccione la presentación de la base de conocimientos",
+                    "Impresión de base de datos", 
+                    JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.PLAIN_MESSAGE,
+                    null, 
+                    options, 
+                    null);
+            System.out.println(result);
+            if (result == 0){
+                //ejecuta diagrama
+                GUI g = new GUI(t);
+                
+            } else {
+                
+                StringBuilder sb = new StringBuilder();
+                String recorrido = t.printPreOrder(t.root,sb, "");
+                String finalStr = t.print(recorrido);
+                
+                
+                JOptionPane.showMessageDialog(null, 
+                    finalStr, 
+                    "Recorrido del Directorio", 
+                    JOptionPane.INFORMATION_MESSAGE); 
+                }   
+        } catch (Exception e){
+            System.out.println("Vuelta a menú");
+        }
+        } else {JOptionPane.showMessageDialog(null, 
+                    "No existe base de datos. Cargue un archivo para poder buscar",
+                    "Base de datos no encontrada", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_printDBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -583,6 +664,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton noButton;
     private javax.swing.JLabel photo;
     private javax.swing.JButton play;
+    private javax.swing.JButton printDB;
     private javax.swing.JButton search;
     private javax.swing.JButton siButton;
     private javax.swing.JLabel title;

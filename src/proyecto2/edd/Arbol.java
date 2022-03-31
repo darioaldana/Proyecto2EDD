@@ -25,6 +25,33 @@ public class Arbol {
             return n == null; 
     }
     
+    public int getHeight(Nodo root) {
+		if (root == null)
+			return 0;
+		return Math.max(getHeight(root.getLeft()), getHeight(root.getRight())) + 1;
+	}
+    
+    
+    
+    public int getLevel(Nodo current,String key,int counter){
+        
+        int x; 
+        
+        if(current == null){return 0;}
+        
+        if(current.getData().equals(key)){
+            return counter;
+        }
+
+        x = getLevel(current.getLeft(),key, counter+1);
+
+        if(x!=0){return x;}
+
+        x = getLevel(current.getRight(),key,counter + 1);
+        return x;
+    }
+    
+    
     public void insertRoot(String data) {
         this.root = new Nodo(data);
     }
@@ -148,4 +175,54 @@ public class Arbol {
     void inicializar() {
         this.root = null; 
     }
+    
+    public String printPreOrder(Nodo n, StringBuilder sb, String answer){
+        if (n != null){
+            sb.append(answer);
+            sb.append(n.getData());
+            sb.append("/");
+           
+            printPreOrder(n.getLeft(), sb, "No: ");
+            printPreOrder(n.getRight(), sb, "Sí: ");
+          
+            return sb.toString(); 
+        } else {
+            return null; 
+        }
+    }
+    
+    public String print(String preorden){
+        
+        String[] nodos = preorden.split("/");
+        int indent; 
+        Nodo n;
+        String finalStr = "";
+        String prefix = ""; 
+        String key = "";
+       
+        for (int i = 0; i < nodos.length; i++) {
+
+            key = nodos[i];
+            
+            if (i!=0){
+                prefix = "";
+                for (int j = 0; j < 4; j++) {
+                    prefix = prefix + key.charAt(j);
+                }
+            } else {
+                String s = Character.toString(key.charAt(0));
+                nodos[i] = key.replace(s, s.toUpperCase());
+            }
+            
+            
+            key = key.replace(prefix, "");
+            indent = getLevel(root, key, 1)-1;
+            finalStr = finalStr + ("│        ".repeat(indent)) + nodos[i] + "\n"; 
+
+        }
+        
+        return finalStr; 
+        
+    }
+  
 }
