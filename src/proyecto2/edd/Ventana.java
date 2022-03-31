@@ -7,6 +7,7 @@ package proyecto2.edd;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -92,6 +93,7 @@ public class Ventana extends javax.swing.JFrame {
     private void initComponents() {
 
         line = new javax.swing.JTextField();
+        subtitle = new javax.swing.JLabel();
         title = new javax.swing.JLabel();
         printDB = new javax.swing.JButton();
         adminDB = new javax.swing.JButton();
@@ -112,6 +114,10 @@ public class Ventana extends javax.swing.JFrame {
 
         line.setBackground(new java.awt.Color(0, 102, 0));
         getContentPane().add(line, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 320, 10));
+
+        subtitle.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        subtitle.setText("Versión Safari con Diego Go");
+        getContentPane().add(subtitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 220, -1));
 
         title.setFont(new java.awt.Font("Bahnschrift", 3, 68)); // NOI18N
         title.setText("Akinator");
@@ -202,7 +208,7 @@ public class Ventana extends javax.swing.JFrame {
         play.setText("JUGAR");
         play.setToolTipText("");
         play.setAlignmentY(0.0F);
-        play.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        play.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 0, 0)));
         play.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playActionPerformed(evt);
@@ -215,7 +221,7 @@ public class Ventana extends javax.swing.JFrame {
         loadDB.setText("<html>Cargar base de<br>conocimientos</html>");
         loadDB.setToolTipText("");
         loadDB.setAlignmentY(0.0F);
-        loadDB.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(207, 83, 0)));
+        loadDB.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 0, 0)));
         loadDB.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         loadDB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,9 +249,6 @@ public class Ventana extends javax.swing.JFrame {
         GuardarInfo.setText("<html>Almacenar base de<br>conocimientos</html>");
         GuardarInfo.setBorder(new javax.swing.border.MatteBorder(null));
         GuardarInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        GuardarInfo.setMaximumSize(new java.awt.Dimension(81, 21));
-        GuardarInfo.setMinimumSize(new java.awt.Dimension(81, 21));
-        GuardarInfo.setPreferredSize(new java.awt.Dimension(81, 21));
         GuardarInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GuardarInfoActionPerformed(evt);
@@ -546,21 +549,40 @@ public class Ventana extends javax.swing.JFrame {
                 JOptionPane.QUESTION_MESSAGE);
             
             if (result == JOptionPane.YES_OPTION){
-                inicializar();
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append("Pregunta, No, Si");
+                String db = t.createTxt(sb, t.root);
+                
                 JOptionPane.showMessageDialog(null,
-                    "Base de conococimientos almacenada.",
+                        "Ingrese la ruta del archivo donde se almacenerá la información.",
+                        "Guardar Base de Datos",
+                        JOptionPane.INFORMATION_MESSAGE);
+                
+                String path = getPath();
+                System.out.println("\n\nDB\n" + db);
+                
+                PrintWriter pw = new PrintWriter(path);
+                pw.write(db);
+                pw.close();
+                
+                JOptionPane.showMessageDialog(null,
+                    "Base de conococimientos almacenada con éxito.",
                     "Base de conocimientos almacenada",
                     JOptionPane.INFORMATION_MESSAGE); 
-            }
+
+                } 
             
-        } catch (Exception e){
-            System.out.println("Vuelta a menú");
-        }
+            } catch (Exception e){
+                System.out.println("Error; Vuelta a menú");
+            }
         } else {JOptionPane.showMessageDialog(null, 
                     "No existe base de datos. Cargue un archivo para poder guardar.",
                     "Base de datos no encontrada", 
                     JOptionPane.ERROR_MESSAGE);
         }
+        
+        
         
         search.setVisible(true);
         play.setVisible(true);
@@ -569,10 +591,7 @@ public class Ventana extends javax.swing.JFrame {
         inicializarButton.setVisible(false);
         GuardarInfo.setVisible (false);
         printDB.setVisible(false);
-        
-       
-    
-            
+  
     }//GEN-LAST:event_GuardarInfoActionPerformed
 
     private void printDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printDBActionPerformed
@@ -667,6 +686,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton printDB;
     private javax.swing.JButton search;
     private javax.swing.JButton siButton;
+    private javax.swing.JLabel subtitle;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 

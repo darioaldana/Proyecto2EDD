@@ -224,5 +224,26 @@ public class Arbol {
         return finalStr; 
         
     }
+    
+    public String createTxt(StringBuilder sb, Nodo current){
+
+        String line = "";
+        if (current.getLeft() != null && current.getRight() != null){
+            line = line + current.getData() + ", "; 
+            line = line + current.getLeft().getData() + ", ";
+            line = line + current.getRight().getData() + ", ";
+            sb.append("\n" + line); 
+        }
+ 
+        if (current.getLeft() != null){
+            createTxt(sb, current.getLeft());
+        }
+        
+        if (current.getRight() != null){
+            createTxt(sb, current.getRight());
+        }
+
+        return sb.toString(); 
+    }
   
 }
